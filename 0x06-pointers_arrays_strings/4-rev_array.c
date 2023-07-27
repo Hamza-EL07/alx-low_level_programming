@@ -1,11 +1,10 @@
-#include "holberton.h"
+#include "main.h"
 /**
  * reverse_array - prints reverse array.
  * @a: array to be compared.
  * @n: size of array.
  * Return: reversed array.
  */
-
 void reverse_array(int *a, int n)
 {
 	int swap, begin, end;
@@ -15,7 +14,7 @@ void reverse_array(int *a, int n)
 	while (begin < end)
 	{
 		swap = *(a + begin);
-		*(a + brgin) = *(a + end);
+		*(a + begin) = *(a + end);
 		*(a + end) = swap;
 		begin++;
 		end--;
