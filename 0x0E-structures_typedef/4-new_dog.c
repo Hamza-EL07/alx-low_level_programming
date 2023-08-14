@@ -1,60 +1,91 @@
-#include "dog.h"
 #include <stdlib.h>
+#include "dog.h"
+
+int _strlen(char *s);
+char *_strcpy(char *dest, char *src);
 
 /**
- * _strcopy - copy read only data to mutatable.
- * @dst: pointer to copy char to.
- * @src: read only data.
- */
-void _strcopy(char *dst, char *src)
+  * new_dog - ...
+  * @name: ...
+  * @age: ...
+  * @owner: ...
+  *
+  * Return: ...
+  */
+dog_t *new_dog(char *name, float age, char *owner)
+{
+	dog_t *cutie_dog;
+	int name_l = 0, own_l = 0;
+
+	if (name != NULL && owner != NULL)
+	{
+		name_l = _strlen(name) + 1;
+		own_l = _strlen(owner) + 1;
+		cutie_dog = malloc(sizeof(dog_t));
+
+		if (cutie_dog == NULL)
+			return (NULL);
+
+		cutie_dog->name = malloc(sizeof(char) * name_l);
+
+		if (cutie_dog->name == NULL)
+		{
+			free(cutie_dog);
+			return (NULL);
+		}
+
+		cutie_dog->owner = malloc(sizeof(char) * own_l);
+
+		if (cutie_dog->owner == NULL)
+		{
+			free(cutie_dog->name);
+			free(cutie_dog);
+			return (NULL);
+		}
+
+		cutie_dog->name = _strcpy(cutie_dog->name, name);
+		cutie_dog->owner = _strcpy(cutie_dog->owner, owner);
+		cutie_dog->age = age;
+	}
+
+	return (cutie_dog);
+}
+
+/**
+  * _strlen - Returns the length of a string
+  * @s: String to count
+  *
+  * Return: String length
+  */
+int _strlen(char *s)
+{
+	int c = 0;
+
+	for (; *s != '\0'; s++)
+	{
+		c++;
+	}
+
+	return (c);
+}
+
+/**
+  * _strcpy - Copy a string
+  * @dest: Destination value
+  * @src: Source value
+  *
+  * Return: the pointer to dest
+  */
+char *_strcpy(char *dest, char *src)
 {
 	int i;
 
-	for (i = 0; src[i]; i++)
-		dst[i] = src[i];
-	dst[i] = '\0';
-}
-
-/**
- * new_dog - create new dog from the dna of the first dog.
- * @name: name of dog
- * @age: age of dog
- * @owner: owner of dog
- *
- * Return: pointer to dog
- */
-dog_t *new_dog(char *name, float age, char *owner)
-{
-	dog_t *d;
-	int a, b;
-
-	for (a = 0; name[a]; a++)
-		;
-	for (b = 0; owner[b]; b++)
-		;
-
-	d = malloc(sizeof(dog_t));
-	if (!d)
-		return (NULL);
-
-	d->name = malloc(a + 1);
-	if (!d->name)
+	for (i = 0; src[i] != '\0'; i++)
 	{
-		free(d);
-		return (NULL);
+		dest[i] = src[i];
 	}
 
-	d->owner = malloc(b + 1);
-	if (!d->owner)
-	{
-		free(d->name);
-		free(d);
-		return (NULL);
-	}
+	dest[i++] = '\0';
 
-	_strcopy(d->name, name);
-	_strcopy(d->owner, owner);
-	d->age = age;
-	return (d);
+	return (dest);
 }
-
