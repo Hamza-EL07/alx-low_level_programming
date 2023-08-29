@@ -1,9 +1,5 @@
-#ifndef MAIN_H
-#define MAIN_H
-
-/*
- * File: lists.h
- */
+#ifndef LISTS_H
+#define LISTS_H
 
 #include <stdlib.h>
 
@@ -37,4 +33,4 @@ size_t print_listint_safe(const listint_t *head);
 size_t free_listint_safe(listint_t **h);
 listint_t *find_listint_loop(listint_t *head);
 
-#endif /* MAIN_H */
+#endif /* LISTS_H */
