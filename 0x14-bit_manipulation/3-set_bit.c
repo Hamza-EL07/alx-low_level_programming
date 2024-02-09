@@ -16,4 +16,6 @@ int set_bit(unsigned long int *n, unsigned int index)
 
 	ulin <<= index;
 	*n = (*n | ulin);
+
+	return (1);
 }
